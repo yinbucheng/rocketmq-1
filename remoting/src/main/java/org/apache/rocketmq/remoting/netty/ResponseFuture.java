@@ -24,10 +24,14 @@ import org.apache.rocketmq.remoting.common.SemaphoreReleaseOnlyOnce;
 import org.apache.rocketmq.remoting.protocol.RemotingCommand;
 
 public class ResponseFuture {
+    //消息唯一标示编号
     private final int opaque;
+    //请求处理超时时间
     private final long timeoutMillis;
     private final InvokeCallback invokeCallback;
+    //消息对象开始时间
     private final long beginTimestamp = System.currentTimeMillis();
+    //用于相应阻塞
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     private final SemaphoreReleaseOnlyOnce once;

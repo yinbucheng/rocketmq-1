@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 拉取消息请求挂起维护线程服务
  */
+@SuppressWarnings("all")
 public class PullRequestHoldService extends ServiceThread {
 
     private static final Logger log = LoggerFactory.getLogger(LoggerName.BROKER_LOGGER_NAME);
@@ -128,7 +129,9 @@ public class PullRequestHoldService extends ServiceThread {
         for (String key : this.pullRequestTable.keySet()) {
             String[] kArray = key.split(TOPIC_QUEUEID_SEPARATOR);
             if (2 == kArray.length) {
+                //主题名称
                 String topic = kArray[0];
+                //队列的ID编号
                 int queueId = Integer.parseInt(kArray[1]);
                 final long offset = this.brokerController.getMessageStore().getMaxOffsetInQuque(topic, queueId);
                 try {

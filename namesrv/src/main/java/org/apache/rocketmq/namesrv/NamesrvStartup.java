@@ -18,11 +18,13 @@ package org.apache.rocketmq.namesrv;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -38,6 +40,7 @@ import org.apache.rocketmq.srvutil.ServerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("all")
 public class NamesrvStartup {
     public static Properties properties = null;
     public static CommandLine commandLine = null;
@@ -62,8 +65,8 @@ public class NamesrvStartup {
 
             Options options = ServerUtil.buildCommandlineOptions(new Options());
             commandLine =
-                ServerUtil.parseCmdLine("mqnamesrv", args, buildCommandlineOptions(options),
-                    new PosixParser());
+                    ServerUtil.parseCmdLine("mqnamesrv", args, buildCommandlineOptions(options),
+                            new PosixParser());
             if (null == commandLine) {
                 System.exit(-1);
                 return null;
@@ -103,7 +106,7 @@ public class NamesrvStartup {
 
             if (null == namesrvConfig.getRocketmqHome()) {
                 System.out.printf("Please set the " + MixAll.ROCKETMQ_HOME_ENV
-                    + " variable in your environment to match the location of the RocketMQ installation%n");
+                        + " variable in your environment to match the location of the RocketMQ installation%n");
                 System.exit(-2);
             }
 

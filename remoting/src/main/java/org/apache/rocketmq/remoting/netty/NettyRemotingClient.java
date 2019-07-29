@@ -149,6 +149,7 @@ public class NettyRemotingClient extends NettyRemotingAbstract implements Remoti
             @Override
             public void run() {
                 try {
+                    //扫描结果响应表
                     NettyRemotingClient.this.scanResponseTable();
                 } catch (Exception e) {
                     log.error("scanResponseTable exception", e);

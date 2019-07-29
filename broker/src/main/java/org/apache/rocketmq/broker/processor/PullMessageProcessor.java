@@ -95,7 +95,7 @@ public class PullMessageProcessor implements NettyRequestProcessor {
         final PullMessageResponseHeader responseHeader = (PullMessageResponseHeader)response.readCustomHeader();
         final PullMessageRequestHeader requestHeader =
             (PullMessageRequestHeader)request.decodeCommandCustomHeader(PullMessageRequestHeader.class);
-
+        //设置传递的唯一标记上去
         response.setOpaque(request.getOpaque());
 
         if (LOG.isDebugEnabled()) {
