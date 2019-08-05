@@ -171,7 +171,7 @@ public class RouteInfoManager {
     }
 
     /**
-     * broker 注册
+     * broker 注册，这里是broker心跳上报数据时会进入到这个方法里面
      *
      * @param clusterName        集群名
      * @param brokerAddr         broker地址
@@ -197,7 +197,7 @@ public class RouteInfoManager {
         RegisterBrokerResult result = new RegisterBrokerResult();
         try {
             try {
-                this.lock.writeLock().lockInterruptibly(); // TODO 疑问：为什么要两层try
+                this.lock.writeLock().lockInterruptibly();
                 // 更新集群信息
                 Set<String> brokerNames = this.clusterAddrTable.get(clusterName);
                 if (null == brokerNames) {
