@@ -115,11 +115,13 @@ public class BrokerOuterAPI {
         final boolean oneway,
         final int timeoutMills) {
         RegisterBrokerResult registerBrokerResult = null;
-
+        //获取所有的NameServer的地址
         List<String> nameServerAddressList = this.remotingClient.getNameServerAddressList();
         if (nameServerAddressList != null) {
-            for (String namesrvAddr : nameServerAddressList) { // 循环多个 Namesrv
+            //遍历所有的NameServer列表
+            for (String namesrvAddr : nameServerAddressList) {
                 try {
+                    //向NameServer进行注册
                     RegisterBrokerResult result = this.registerBroker(namesrvAddr, clusterName, brokerAddr, brokerName, brokerId,
                         haServerAddr, topicConfigWrapper, filterServerList, oneway, timeoutMills);
                     if (result != null) {
@@ -138,11 +140,11 @@ public class BrokerOuterAPI {
 
     private RegisterBrokerResult registerBroker(
         final String namesrvAddr,
-        final String clusterName,
-        final String brokerAddr,
-        final String brokerName,
-        final long brokerId,
-        final String haServerAddr,
+        final String clusterName,//集群名称
+        final String brokerAddr,//broker地址
+        final String brokerName,//broker名称
+        final long brokerId, //0 表示Master 大于0表示Slave
+        final String haServerAddr,//master地址，初次请求时该值为空，slave向NameServer注册后返回
         final TopicConfigSerializeWrapper topicConfigWrapper,
         final List<String> filterServerList,
         final boolean oneway,
