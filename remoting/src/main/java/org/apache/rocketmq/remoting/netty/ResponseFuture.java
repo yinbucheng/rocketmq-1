@@ -31,7 +31,7 @@ public class ResponseFuture {
     private final InvokeCallback invokeCallback;
     //消息对象开始时间
     private final long beginTimestamp = System.currentTimeMillis();
-    //用于相应阻塞
+    //用于响应阻塞
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     private final SemaphoreReleaseOnlyOnce once;

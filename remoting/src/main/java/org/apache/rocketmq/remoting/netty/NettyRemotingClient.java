@@ -112,6 +112,8 @@ public class NettyRemotingClient extends NettyRemotingAbstract implements Remoti
         return Math.abs(r.nextInt() % 999) % 999;
     }
 
+
+    //客户端启动代码进行远程连接
     @Override
     public void start() {
         this.defaultEventExecutorGroup = new DefaultEventExecutorGroup(//
@@ -433,7 +435,7 @@ public class NettyRemotingClient extends NettyRemotingAbstract implements Remoti
 
     /**
      * 根据指定的addr创建Channel,创建成功了放入{@link #channelTables}中以备下次复用
-     *
+     * 根据address创建远程连接，并放入缓存中以备下次使用
      * @param addr
      * @return
      * @throws InterruptedException

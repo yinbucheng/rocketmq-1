@@ -151,6 +151,7 @@ public abstract class NettyRemotingAbstract {
             }
 
             try {
+                //将请求封装为一个任务放入到线程中进行处理
                 final RequestTask requestTask = new RequestTask(run, ctx.channel(), cmd);
                 pair.getObject2().submit(requestTask);
             } catch (RejectedExecutionException e) {
@@ -243,7 +244,7 @@ public abstract class NettyRemotingAbstract {
         while (it.hasNext()) {
             Entry<Integer, ResponseFuture> next = it.next();
             ResponseFuture rep = next.getValue();
-            //这里表示已经超时了，将未执行的请求是否掉
+            //这里表示已经超时了，将未执行的请求释放掉，这里设计超时时间有点意思  当前时间>=请求发送开始时间+设置超时时间+1秒
             if ((rep.getBeginTimestamp() + rep.getTimeoutMillis() + 1000) <= System.currentTimeMillis()) {
                 rep.release();
                 it.remove();
